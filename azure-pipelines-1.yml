@@ -2,22 +2,6 @@ pool:
   name: 'Ubuntu-VM'
 
 steps:
-  #- checkout: self
-
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '18.x'
-    displayName: 'Install Node.js'
-
-  - task: JFrogNpm@1
-    inputs:
-      command: 'ci'
-      artifactoryConnection: 'jfrog-artifactory'
-      workingFolder: 'npm-example/'
-      collectBuildInfo: true
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
-
   - task: JFrogNpm@1
     inputs:
       command: 'pack and publish'
