@@ -8,7 +8,7 @@
 #- master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: Ubuntu-VM
 
 steps:
 - script: echo Hello, world!
