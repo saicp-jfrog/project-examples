@@ -18,7 +18,7 @@ steps:
     inputs:
       command: 'install'
       artifactoryConnection: 'jfrog-artifactory'
-      sourceRepo: 'saicp-npm'
+      sourceRepo: 'saicp-npm-virtual'
       workingFolder: 'npm-example'
       collectBuildInfo: true
       threads: '1'
@@ -30,7 +30,7 @@ steps:
     inputs:
       command: 'ci'
       artifactoryConnection: 'jfrog-artifactory'
-      sourceRepo: 'saicp-npm'
+      sourceRepo: 'saicp-npm-virtual'
       workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
@@ -41,7 +41,7 @@ steps:
     inputs:
       command: 'pack and publish'
       artifactoryConnection: 'jfrog-artifactory'
-      targetRepo: 'saicp-npm'
+      targetRepo: 'saicp-npm-virtual'
       workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
@@ -63,7 +63,7 @@ steps:
       targetRepo: 'saicp-promotion-local'
       status: 'Released'
       comment: 'Released'
-      sourceRepo: 'saicp-npm'
+      sourceRepo: 'saicp-npm-virtual'
       includeDependencies: false
       copy: true
       dryRun: false
