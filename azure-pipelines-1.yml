@@ -2,7 +2,29 @@ pool:
   name: 'Ubuntu-VM'
 
 steps:
+  - checkout: self
 
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'   # or 20.x, depending on your project
+    displayName: 'Install Node.js'
+
+  - script: |
+      node -v
+      npm -v
+    displayName: 'Verify Node.js installation'
+
+  # Step 1: Install dependencies from Artifactory
+  - task: JFrogNpm@1
+    inputs:
+      command: 'ci'
+      artifactoryConnection: 'jfrog-artifactory'
+      workingFolder: 'npm-example/'
+      collectBuildInfo: true
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+
+  # Step 2: Pack and publish the package
   - task: JFrogNpm@1
     inputs:
       command: 'pack and publish'
@@ -13,12 +35,14 @@ steps:
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
 
+  # Step 3: Publish build info
   - task: JFrogPublishBuildInfo@1
     inputs:
       artifactoryConnection: 'jfrog-artifactory'
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
 
+  # Step 4: Promote the build
   - task: JFrogBuildPromotion@1
     inputs:
       artifactoryConnection: 'jfrog-artifactory'
