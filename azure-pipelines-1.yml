@@ -2,12 +2,24 @@ pool:
   name: 'Ubuntu-VM'
 
 steps:
+  - checkout: self
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'   # or 20.x, depending on your project
+    displayName: 'Install Node.js'
+
+  - script: |
+      node -v
+      npm -v
+    displayName: 'Verify Node.js installation'
+
   - task: JFrogNpm@1
     inputs:
       command: 'pack and publish'
       artifactoryConnection: 'jfrog-artifactory'
       targetRepo: 'saicp-npm-local'
-      workingFolder: 'npm-example'
+      workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
