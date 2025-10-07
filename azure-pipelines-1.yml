@@ -23,7 +23,7 @@ steps:
       command: 'pack and publish'
       artifactoryConnection: 'jfrog-artifactory'
       targetRepo: 'saicp-npm-local'
-      workingFolder: 'npm3/'
+      workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
