@@ -2,6 +2,7 @@ pool:
   name: 'Ubuntu-VM'
 
 steps:
+
   - task: JFrogNpm@1
     inputs:
       command: 'pack and publish'
