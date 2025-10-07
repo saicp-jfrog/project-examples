@@ -1,35 +1,32 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 pool:
- name: 'Ubuntu-VM'
-steps:
-- task: JFrogNpm@1
- inputs:
-   command: 'pack and publish'
-   artifactoryConnection: 'jfrog-artifactory'
-   targetRepo: 'saicp-npm-local'
-   workingFolder: 'npm3/'
-   collectBuildInfo: true
-   buildName: '$(Build.DefinitionName)'
-   buildNumber: '$(Build.BuildNumber)'
-- task: JFrogPublishBuildInfo@1
- inputs:
-   artifactoryConnection: 'jfrog-artifactory'
-   buildName: '$(Build.DefinitionName)'
-   buildNumber: '$(Build.BuildNumber)'
-- task: JFrogBuildPromotion@1
- inputs:
-   artifactoryConnection: 'jfrog-artifactory'
-   buildName: '$(Build.DefinitionName)'
-   buildNumber: '$(Build.BuildNumber)'
-   targetRepo: 'saicp-promotion-local'
-   status: 'Released'
-   comment: 'Released'
-   sourceRepo: 'saicp-npm-local'
-   includeDependencies: false
-   copy: true
-   dryRun: false
+  name: 'Ubuntu-VM'
 
+steps:
+  - task: JFrogNpm@1
+    inputs:
+      command: 'pack and publish'
+      artifactoryConnection: 'jfrog-artifactory'
+      targetRepo: 'saicp-npm-local'
+      workingFolder: 'npm3/'
+      collectBuildInfo: true
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+
+  - task: JFrogPublishBuildInfo@1
+    inputs:
+      artifactoryConnection: 'jfrog-artifactory'
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+
+  - task: JFrogBuildPromotion@1
+    inputs:
+      artifactoryConnection: 'jfrog-artifactory'
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+      targetRepo: 'saicp-promotion-local'
+      status: 'Released'
+      comment: 'Released'
+      sourceRepo: 'saicp-npm-local'
+      includeDependencies: false
+      copy: true
+      dryRun: false
