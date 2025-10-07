@@ -19,6 +19,7 @@ steps:
     inputs:
       command: 'ci'
       artifactoryConnection: 'jfrog-artifactory'
+      sourceRepo: 'saicp-npm-local'
       workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
