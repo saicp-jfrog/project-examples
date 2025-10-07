@@ -8,7 +8,7 @@
 #- master
 
 pool:
-  vmImage: Ubuntu-VM
+  name: 'Ubuntu-VM'
 
 steps:
 - script: echo Hello, world!
