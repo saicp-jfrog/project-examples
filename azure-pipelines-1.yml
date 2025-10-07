@@ -14,6 +14,17 @@ steps:
       npm -v
     displayName: 'Verify Node.js installation'
 
+  - task: JFrogNpm@1
+    inputs:
+      command: 'install'
+      artifactoryConnection: 'jfrog-artifactory'
+      sourceRepo: 'saicp-npm'
+      workingFolder: 'npm-example'
+      collectBuildInfo: true
+      threads: '1'
+      buildName: '$(Build.DefinitionName)'
+      buildNumber: '$(Build.BuildNumber)'
+
   # Step 1: Install dependencies from Artifactory
   - task: JFrogNpm@1
     inputs:
