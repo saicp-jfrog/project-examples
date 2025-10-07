@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Ubuntu-VM'
 
 steps:
   #- checkout: self
@@ -13,7 +13,7 @@ steps:
     inputs:
       command: 'ci'
       artifactoryConnection: 'jfrog-artifactory'
-      workingFolder: 'npm-example'
+      workingFolder: 'npm-example/'
       collectBuildInfo: true
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
